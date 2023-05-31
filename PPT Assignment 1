@@ -1,0 +1,109 @@
+#1
+class Solution:
+    def twoSum(self, numbers1, target):
+        ans=[]
+        left = 0
+        numbers=sorted(numbers1)
+        right = len(numbers) - 1 
+        while left < right: 
+            temp_sum = numbers[left] + numbers[right] 
+            if temp_sum > target:  
+                right -= 1 
+            elif temp_sum < target: 
+                left +=1 
+            else:
+                ans.append(((numbers1.index((numbers[left]))),numbers1.index((numbers[right]))))
+                left +=1
+                right -=1
+        return ans
+------------------------------------------------------------------------------------------------
+#2   
+nums=list(map(int,input().split()))
+val = int(input())
+k=0
+ans=[]
+for x in nums:
+    if x!=val:
+        ans.append(x)
+        k += 1
+print(ans)
+------------------------------------------------------------------------------------------------
+#3
+arr=list(map(int,input().split()))
+num=int(input())
+start = 0
+flag=0
+end = len(arr) - 1
+while start<= end:
+    mid =(start + end)//2
+    if arr[mid] == num:
+        flag=1
+        print(mid)
+        break
+    elif arr[mid] < num:
+        start = mid + 1
+    else:
+        end = mid-1
+if flag==0:
+    print(end+1)
+------------------------------------------------------------------------------------------------
+
+#4
+num=list(map(int,input().split()))
+idx=len(num)-1
+while(idx >= 0 and num[idx] == 9):
+    num[idx]=0
+    idx -=1
+if (idx<0):
+    num.insert(0,1)
+else:
+    num[idx] +=1
+print(num)
+----------------------------------------------------------------------------------------------
+
+#5    
+num1 = list(map(int,input().split()))
+m = int(input())
+num2 = list(map(int,input().split()))
+n = int(input())
+l = m + n - 1
+i, j = m-1, n-1
+
+while j >= 0:
+    if i >= 0 and num1[i] > num2[j]:
+        num1[l] = num1[i]
+        i -= 1
+    else:
+        num1[l] = num2[j]
+        j -=1
+    l -=1
+print(num1)
+------------------------------------------------------------------------------------------------
+#6
+arr=list(map(int,input().split()))
+set1=set(arr)
+if(len(arr) == len(set1)):
+    print("False")
+else:
+    print("True")
+------------------------------------------------------------------------------------------------
+#7
+arr=list(map(int,input().split()))
+count = 0
+for i in range(len(arr)):
+    if arr[i]!= 0:
+        arr[count] = arr[i]
+        count +=1
+while(count < len(arr)):
+        arr[count] = 0
+        count +=1
+print(arr)
+
+------------------------------------------------------------------------------------------------
+#8
+arr=list(map(int,input().split()))
+for i in range(len(arr)-1):
+    if arr[i] == arr[i+1]:
+        print("{} {}".format(arr[i], arr[i]+1))
+        break
+------------------------------------------------------------------------------------------------
