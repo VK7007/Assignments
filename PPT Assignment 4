@@ -1,0 +1,129 @@
+#1
+import sys
+def findCommon(ar1, ar2, ar3, n1, n2, n3):
+    arr= []
+    i = 0
+    j = 0
+    k = 0
+    prev1 = prev2 = prev3 = -sys.maxsize - 1
+    while (i < n1 and j < n2 and k < n3):
+        while (ar1[i] == prev1 and i < n1-1):
+                i += 1
+        while (ar2[j] == prev2 and j < n2):
+            j += 1
+        while (ar3[k] == prev3 and k < n3):
+            k += 1
+
+        if (ar1[i] == ar2[j] and ar2[j] == ar3[k]):
+            arr.append(ar1[i])
+            prev1 = ar1[i]
+            prev2 = ar2[j]
+            prev3 = ar3[k]
+            i += 1
+            j += 1
+            k += 1
+        elif (ar1[i] < ar2[j]):
+            prev1 = ar1[i]
+            i += 1
+
+
+        elif (ar2[j] < ar3[k]):
+            prev2 = ar2[j]
+            j += 1
+        else:
+            prev3 = ar3[k]
+            k += 1
+    return arr
+
+
+ar1 = list(map(int,input().split()))
+ar2 = list(map(int,input().split()))
+ar3 =list(map(int,input().split()))
+n1 = len(ar1)
+n2 = len(ar2)
+n3 = len(ar3)
+print(findCommon(ar1, ar2, ar3, n1, n2, n3))
+
+---------------------------------------------------------------------------------
+#3
+class Solution:
+    def transpose(self, matrix):
+        transpose_matrix = [[0 for i in range(0, len(matrix))] for j in range(0, len(matrix[0]))]
+        
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[0])):
+                transpose_matrix[j][i] = matrix[i][j]
+
+        return transpose_matrix
+
+---------------------------------------------------------------------------------
+#4
+arr = list(map(int,input().split()))
+arr.sort()
+ans = arr[0] + arr[len(arr)//2]
+print(ans)
+---------------------------------------------------------------------------------
+#5
+class Solution:
+    def arrangeCoins(self, n):
+        coin_counter = 0
+        rows = 0
+        if n == 1:
+            return 1
+        while coin_counter+(rows+1) <= n:
+            rows += 1
+            coin_counter = coin_counter + rows
+        
+        return rows
+n=int(input())
+obj=Solution()
+print(obj.arrangeCoins(n))
+
+---------------------------------------------------------------------------------
+#6
+class Solution:
+    def sortedSquares(self, nums):
+        out = [0] * len(nums)
+        left, right = 0, len(nums) - 1
+        for i in range(len(nums) - 1, -1, -1):
+            if abs(nums[left]) >= abs(nums[right]):
+                out[i] = nums[left] * nums[left]
+                left += 1
+            else:
+                out[i] = nums[right] * nums[right]
+                right -= 1
+        return out
+n=list(map(int,input().split()))
+obj=Solution()
+print(obj.sortedSquares(n))
+
+---------------------------------------------------------------------------------
+#7
+class Solution:
+    def maxCount(self, m, n,ops):
+        min_y = m
+        min_x = n
+
+        for y, x in ops:
+            min_y = min(min_y, y)
+            min_x = min(min_x, x)
+        return min_x * min_y
+m=int(input())
+n=int(input())
+ops=[]
+for i in range(m):
+    ops.append(list(map(int,input().split())))
+obj=Solution()
+print(obj.maxCount(m, n, ops))
+
+---------------------------------------------------------------------------------
+#8
+arr=list(map(int,input().split()))
+n = int(input())
+ans=[]
+for i in range(0,n): 
+    ans.append(arr[i])
+    ans.append(arr[i+n])
+print(ans)
+
+---------------------------------------------------------------------------------
