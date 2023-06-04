@@ -1,0 +1,119 @@
+#1
+class Solution:
+    def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
+        if len(original) != m*n: return []
+        
+        res = [[None for j in range(n)] for i in range(m)]
+        k = 0
+        
+        for i in range(m):
+            for j in range(n):
+                res[i][j] = original[k]
+                k += 1
+        
+        return res
+-----------------------------------------
+#2
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        coin_counter = 0
+        rows = 0
+        
+        if n == 1:
+            return 1
+
+        while coin_counter+(rows+1) <= n:
+            rows += 1
+            coin_counter = coin_counter + rows
+        
+        return rows
+ ----------------------------------------
+#3
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        
+        n = len(nums)
+        l, r = 0, n - 1
+        k = n - 1
+        ans = [0] * n
+        while k >= 0:
+            if abs(nums[l]) > nums[r]:
+                ans[k] = nums[l] * nums[l]
+                l += 1
+            else:
+                ans[k] = nums[r] * nums[r]
+                r -= 1
+            k -= 1
+        return ans
+
+-------------------------------------------
+
+#4
+class Solution:
+    def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
+        list1,list2,list3=[],[],[]
+        for i in nums1:
+            if i in nums2:
+                continue
+            else:
+                list2.append(i)
+        for j in nums2:
+            if j in nums1:
+                continue
+            else:
+                list3.append(j)
+        list1.append(list(set(list2)))
+        list1.append(list(set(list3)))
+        return list1
+---------------------------------------
+#5
+
+class Solution:
+	def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+		s=0
+		for i in arr1:
+			t=0
+			for j in arr2:
+				if abs(i-j)<= d:
+					t=1
+					break
+			if t==0:
+				s=s+1
+		return s
+-----------------------------------------
+#6
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        res = []
+        hm = {}
+         frequency
+        for i, v in enumerate(nums):
+            if v not in hm:
+                hm[v] = 1
+            else:
+                hm[v] += 1
+      
+        for key, value in hm.items():
+            if value > 1:
+                res.append(key)
+        return res
+------------------------------------------
+#7
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        low,high=0,len(nums)-1
+        n=len(nums)
+        while low<=high:
+            mid=low+(high-low)//2
+            if nums[mid]<=nums[(mid-1+n)%n] and nums[mid]<=nums[(mid+1)%n]:
+                return nums[mid]
+            if nums[mid]>=nums[low]:
+                if nums[high]>=nums[mid]:
+                    high=mid-1
+                else:
+                    low=mid+1
+            else:
+                high=mid-1
+
+        return -1
+-----------------------------------------
