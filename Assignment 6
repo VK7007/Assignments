@@ -1,0 +1,149 @@
+v#1
+class Solution:
+    def diStringMatch(self, s: str) -> List[int]:
+        L,ic,dc=[],0,len(s)
+        for i in s:
+            if i=='I':
+                L.append(ic)
+                ic+=1
+            else:
+                L.append(dc)
+                dc-=1
+        if s[-1]=='I':L.append(ic)
+        else:L.append(dc)
+        return L
+---------------------------------
+
+#2
+
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        
+        row, col = len(matrix), len(matrix[0])
+        i, j = 0, (row * col) - 1
+
+        while i <= j:
+            mid = (i + j) >> 1
+            mid_element = matrix[mid // col][mid % col] 
+            if mid_element == target:
+                return True
+            elif mid_element < target:
+                i = mid + 1
+            else:
+                j = mid - 1
+        return False
+-----------------------------------------
+#3
+
+class Solution:
+    def validMountainArray(self, A: List[int]) -> bool:
+        if not A:
+            return False
+        p1=0
+        p2=len(A)-1
+        peak=max(A)
+        peakAt=A.index(peak) #index complexity O(n)
+        
+        if peakAt==p2 or peakAt==p1: #peak cant be first or last
+            return False
+        
+        while p1<peakAt: #making sure going up is OK
+            if A[p1] >=A[p1+1]:
+                return False
+            p1+=1 
+            
+        while p2>peakAt: #making sure going down is OK
+            if A[p2]>=A[p2-1]:
+                return False
+            p2-=1   
+            
+        return True    
+
+ ----------------------------------------
+
+#4
+
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        
+        D = {0:-1}
+        res = 0
+        temp = 0
+
+        for i,x in enumerate(nums):
+
+            if x == 1:
+                temp += 1
+            else:
+                temp -= 1
+
+            if temp not in D.keys():
+                D[temp] = i
+            else:
+                res = max(res,i-D[temp])
+
+
+        return res
+-----------------------------------------
+
+#5
+class Solution:
+    def minProductSum(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1.sort()
+        nums2.sort()
+        n, res = len(nums1), 0
+        for i in range(n):
+            res += nums1[i] * nums2[n - i - 1]
+        return res
+-----------------------------------------
+#6
+
+class Solution:
+    def findOriginalArray(self, changed: List[int]) -> List[int]:
+        if len(changed) % 2 == 1:
+            return []
+        data = Counter(changed)
+        result = []
+        for k in sorted(data):
+            if data[k] < 0:
+                return []
+            elif k == 0:
+                x, y = divmod(data[k], 2)
+                if y == 1:
+                    return []
+                result += [0] * x
+            elif data[k] > 0:
+                value = k * 2
+                if data[value] == 0:
+                    return []
+                min_value = min(value, data[k])
+                result += [k] * min_value
+                data[k] -= min_value
+                data[value] -= min_value
+        return result
+-----------------------------------------
+#7
+
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0]*n for _ in range(n)]
+        r, c, dr, dc = 0, 0, 0, 1
+        for current in range(1, n*n + 1):
+            matrix[r][c] = current
+            if not (0 <= r + dr < n and 0 <= c + dc < n and matrix[r + dr][c + dc] == 0):
+                dr, dc = dc, -dr
+            r += dr
+            c += dc
+        return matrix
+-------------------------------------------
+
+#8
+class Solution:
+    def multiply(self, mat1: List[List[int]], mat2: List[List[int]]) -> List[List[int]]:
+        r1, c1, c2 = len(mat1), len(mat1[0]), len(mat2[0])
+        res = [[0] * c2 for _ in range(r1)]
+        for i in range(r1):
+            for j in range(c2):
+                for k in range(c1):
+                    res[i][j] += mat1[i][k] * mat2[k][j]
+        return res
