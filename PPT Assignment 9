@@ -1,0 +1,12 @@
+#1
+def powerof2(n):
+	if n == 1:
+		return True
+	elif n % 2 != 0 or n == 0:
+		return False
+	return powerof2(n/2)
+
+num=int(input())
+print(powerof2(num))
+
+----------------------------------------------------------------
