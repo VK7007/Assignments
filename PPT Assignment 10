@@ -1,0 +1,17 @@
+#1
+def powerof3(n):
+
+	if (n <= 0):
+		return False
+	if (n % 3 == 0):
+		return powerof3(n // 3)
+	if (n == 1):
+		return True
+	return False
+
+
+num=int(input())
+if (powerof3(num)):
+	print("Yes")
+else:
+	print("No")
