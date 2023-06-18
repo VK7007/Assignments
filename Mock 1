@@ -1,0 +1,22 @@
+def srt(num):
+
+    i=2
+
+    while i*i <= num:
+
+        i +=1
+
+    return i-1
+
+num = int(input())
+
+if (num==0 or num==1):
+
+    print(num)
+
+else:
+
+    print(srt(num))
+
+    
+
